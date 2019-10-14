@@ -27,17 +27,17 @@ test_that("Test weight_matrix_cpp", {
   )
 
   ## Exact results -----------
-  Z <- matrix(0, nrow = n, ncol = m + 1)
-  Z[, 1] <- 1
+  z_matrix <- matrix(0, nrow = n, ncol = m + 1)
+  z_matrix[, 1] <- 1
   for (i in seq_along(features)) {
     f <- features[[i]]
     if (length(f) > 0) {
-      Z[i, f + 1] <- 1
+      z_matrix[i, f + 1] <- 1
     }
   }
-  W <- matrix(0, nrow = n, ncol = n)
-  diag(W) <- w
-  res <- solve(t(Z) %*% W %*% Z) %*% (t(Z) %*% W)
+  w_matrix <- matrix(0, nrow = n, ncol = n)
+  diag(w_matrix) <- w
+  res <- solve(t(z_matrix) %*% w_matrix %*% z_matrix) %*% (t(z_matrix) %*% w_matrix)
 
   ## Test results -----------
   expect_true(is.matrix(x))

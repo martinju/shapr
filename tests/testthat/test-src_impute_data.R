@@ -15,15 +15,15 @@ test_that("Test observation_impute_cpp", {
   mtcars <- mtcars[1:15, seq(nfeatures)]
   ntrain <- 14
   xtrain <- mtcars[seq(ntrain), ]
-  xtest <- mtcars[-seq(ntrain),, drop = FALSE]
-  S <- matrix(0L, ncomb, nfeatures)
+  xtest <- mtcars[-seq(ntrain), , drop = FALSE]
+  s_matrix <- matrix(0L, ncomb, nfeatures)
   features <- list(
     integer(), 1, 2, 3, c(1, 2), c(1, 3), c(2, 3), c(1, 2, 3)
   )
   for (i in seq_along(features)) {
     feature_i <- features[[i]]
     if (length(feature_i) > 0) {
-      S[i, features[[i]]] <- 1L
+      s_matrix[i, features[[i]]] <- 1L
     }
   }
 
@@ -34,7 +34,7 @@ test_that("Test observation_impute_cpp", {
       index_s = c(1, 2, 3),
       xtrain = xtrain,
       xtest = xtest,
-      S = S
+      S = s_matrix
     )
   )
   expect_error(
@@ -43,19 +43,19 @@ test_that("Test observation_impute_cpp", {
       index_s = c(2, 3),
       xtrain = xtrain[, 1:2],
       xtest = xtest,
-      S = S
+      S = s_matrix
     )
   )
 
   # Tests (valid input) -----------
-  index_xtrain = c(1, 2)
-  index_s = c(4, 5)
+  index_xtrain <- c(1, 2)
+  index_s <- c(4, 5)
   x <- observation_impute_cpp(
     index_xtrain = index_xtrain,
     index_s = index_s,
     xtrain = xtrain,
     xtest = xtest,
-    S = S
+    S = s_matrix
   )
 
   expect_equal(nrow(x), length(index_s))
@@ -63,7 +63,7 @@ test_that("Test observation_impute_cpp", {
   expect_true(is.matrix(x))
   expect_true(is.double(x))
 
-  for (i in 1:nrow(x)) {
+  for (i in seq_len(nrow(x))) {
 
     feature_i <- features[[index_s[i]]]
 
