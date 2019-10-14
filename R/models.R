@@ -32,12 +32,12 @@ predict_model <- function(x, newdata) {
 #' @export
 predict_model.default <- function(x, newdata) {
 
-    str_error <- paste(
-      "It seems that you passed a non-valid model object.",
-      "See more information about which models that are supported",
-      "by running ?predict_model."
-    )
-    stop(str_error)
+  str_error <- paste(
+    "It seems that you passed a non-valid model object.",
+    "See more information about which models that are supported",
+    "by running ?predict_model."
+  )
+  stop(str_error)
 }
 
 #' @rdname predict_model
@@ -45,8 +45,8 @@ predict_model.default <- function(x, newdata) {
 #' @export
 predict_model.lm <- function(x, newdata) {
 
-  if (!requireNamespace('stats', quietly = TRUE)) {
-    stop('The stats package is required for predicting stats models')
+  if (!requireNamespace("stats", quietly = TRUE)) {
+    stop("The stats package is required for predicting stats models")
   }
 
   predict(x, newdata)
@@ -57,8 +57,8 @@ predict_model.lm <- function(x, newdata) {
 #' @export
 predict_model.glm <- function(x, newdata) {
 
-  if (!requireNamespace('stats', quietly = TRUE)) {
-    stop('The stats package is required for predicting stats models')
+  if (!requireNamespace("stats", quietly = TRUE)) {
+    stop("The stats package is required for predicting stats models")
   }
 
   if (x$family[[1]] == "binomial") {
@@ -73,8 +73,8 @@ predict_model.glm <- function(x, newdata) {
 #' @export
 predict_model.ranger <- function(x, newdata) {
 
-  if (!requireNamespace('ranger', quietly = TRUE)) {
-    stop('The ranger package is required for predicting ranger models')
+  if (!requireNamespace("ranger", quietly = TRUE)) {
+    stop("The ranger package is required for predicting ranger models")
   }
 
   if (x$treetype == "Probability estimation") {
@@ -89,8 +89,8 @@ predict_model.ranger <- function(x, newdata) {
 #' @export
 predict_model.xgb.Booster <- function(x, newdata) {
 
-  if (!requireNamespace('stats', quietly = TRUE)) {
-    stop('The xgboost package is required for predicting xgboost models')
+  if (!requireNamespace("stats", quietly = TRUE)) {
+    stop("The xgboost package is required for predicting xgboost models")
   }
 
   predict(x, as.matrix(newdata))
@@ -101,8 +101,8 @@ predict_model.xgb.Booster <- function(x, newdata) {
 #' @export
 predict_model.mgcv <- function(x, newdata) {
 
-  if (!requireNamespace('mgcv', quietly = TRUE)) {
-    stop('The mgcv package is required for predicting mgcv models')
+  if (!requireNamespace("mgcv", quietly = TRUE)) {
+    stop("The mgcv package is required for predicting mgcv models")
   }
 
   predict(x, newdata)
