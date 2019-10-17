@@ -32,7 +32,11 @@ sample_copula <- function(index_given, n_samples, mu, cov_mat, p, x_test_gaussia
       X.given = x_test_gaussian[index_given]
     )
 
-    ret0_z <- mvnfast::rmvn(n = n_samples, mu = tmp$condMean, sigma = tmp$condVar)
+    if (requireNamespace("mvnfast", quietly = TRUE)) {
+      ret0_z <- mvnfast::rmvn(n = n_samples, mu = tmp$condMean, sigma = tmp$condVar)
+    } else {
+      ret0_z <- MASS::mvrnorm(n = n_samples, mu = tmp$condMean, Sigma = tmp$condVar)
+    }
 
     ret0_x <- apply(
       X = rbind(ret0_z, x_train[, dependent_ind, drop = F]),
@@ -89,7 +93,11 @@ sample_gaussian <- function(index_given, n_samples, mu, cov_mat, p, x_test, ensu
       tmp[["condVar"]] <- Matrix::symmpart(tmp$condVar)
     }
 
-    ret0 <- mvnfast::rmvn(n = n_samples, mu = tmp$condMean, sigma = tmp$condVar)
+    if (requireNamespace("mvnfast", quietly = TRUE)) {
+      ret0 <- mvnfast::rmvn(n = n_samples, mu = tmp$condMean, sigma = tmp$condVar)
+    } else {
+      ret0 <-  MASS::mvrnorm(n = n_samples, mu = tmp$condMean, Sigma = tmp$condVar)
+    }
 
     ret <- matrix(NA, ncol = p, nrow = n_samples)
     ret[, index_given] <- rep(x_test_gaussian, each = n_samples)

@@ -27,9 +27,9 @@ Imports:
     data.table,
     Rcpp (>= 0.12.15),
     condMVNorm,
-    mvnfast,
     Matrix
 Suggests: 
+    mvnfast,
     ranger,
     xgboost,
     mgcv,
