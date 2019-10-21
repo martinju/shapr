@@ -5,7 +5,7 @@
 #' @param x A matrix or data.frame. Contains the the features, whose
 #' predictions ought to be explained (test data).
 #'
-#' @param explainer An \code{explainer} object to use for exaplaining the observations.
+#' @param explainer An \code{explainer} object to use for explaining the observations.
 #' See \code{\link{shapr}}.
 #'
 #' @param approach Character vector of length \code{1} or \code{n_features}.
@@ -50,6 +50,10 @@ explain <- function(x, explainer, approach, prediction_zero, ...) {
     )
   }
 
+  # Check that x contains correct variables
+  explainer$p <- predict_model(explainer$model, head(x, 1))
+  explainer$p <- NULL
+
   if (length(approach) > 1) {
     class(x) <- "combined"
   } else {
@@ -59,10 +63,8 @@ explain <- function(x, explainer, approach, prediction_zero, ...) {
   UseMethod("explain", x)
 }
 
-#' @param type String or list. Only applicable when \code{approach='empirical'}. If a string, the
-#' type of empirical approach to use,  equal to 'independence, 'gaussian' or 'fixed_sigma'. If a
-#' list, the elements in the list refers to the rows in \code{x} that ought to be included in
-#' each of the empirical approaches.
+#' @param type Character. Should be equal to either \code{"independence"},
+#' \code{"fixed_sigma"}, \code{"AICc_each_k"} or \code{"AICc_full"}.
 #'
 #' @param fixed_sigma_vec Vector or numeric. Only applicable when \code{approach='empirical'} and
 #' \code{type='fixed_sigma'}. The bandwidth to use. Default value \code{0.1}
@@ -78,7 +80,7 @@ explain <- function(x, explainer, approach, prediction_zero, ...) {
 #' @param AIC_optim_startval Numeric. Only applicable when \code{approach='empirical'} and
 #' \code{type='AICc_each_k'} or \code{type='AICc_full'}. Starting value when optimizing the AICc.
 #'
-#' @param w_threshold Postive integer between 0 and 1.
+#' @param w_threshold Positive integer between 0 and 1.
 #'
 #' @rdname explain
 #' @name explain
@@ -211,22 +213,13 @@ explain.combined <- function(x, explainer, approach, prediction_zero, mu = NULL,
   l <- get_list_approaches(explainer$X$nfeatures, approach)
   explainer$return <- TRUE
   explainer$x_test <- as.matrix(x)
-  dt_e <- dt_g <- dt_c <- NULL
 
-  if (!is.null(l$empirical)) {
-    dt_e <- explain(x, explainer, approach = "empirical", prediction_zero, index_features = l$empirical, ...)
+  dt_l <- list()
+  for (i in seq_along(l)) {
+    dt_l[[i]] <- explain(x, explainer, approach = names(l)[i], prediction_zero, index_features = l[[i]], ...)
   }
 
-  if (!is.null(l$gaussian)) {
-    dt_g <- explain(x, explainer, approach = "gaussian", prediction_zero, index_features = l$gaussian, ...)
-
-  }
-
-  if (!is.null(l$copula)) {
-    dt_c <- explain(x, explainer, approach = "copula", prediction_zero, index_features = l$copula, ...)
-  }
-
-  dt <- data.table::rbindlist(list(dt_e, dt_g, dt_c), use.names = TRUE)
+  dt <- data.table::rbindlist(dt_l, use.names = TRUE)
 
   r <- prediction(dt, prediction_zero, explainer)
 
@@ -278,13 +271,15 @@ get_list_approaches <- function(n_features, approach) {
 #' to \code{NULL}. Otherwise, it needs to be filled out.
 #' @param minsplit is the value that the sum of the left and right daughter nodes need to exceed.
 #' @param minbucket is equal to the minimum sum of weights in a terminal node.
+#' @param sample whether to sample from the node or just take all observations
 
 
 #' @rdname explain
 #' @export
 explain.ctree <- function(x, explainer, approach, prediction_zero, comb_indici = NULL, comb_mincriterion = NULL,
                           mincriterion = 0.95,
-                          minsplit = 20, minbucket = 7, ...){
+                          minsplit = 20, minbucket = 7,
+                          sample = TRUE, ...){
 
   # Add arguments to explainer object
   explainer$x_test <- as.matrix(x)
@@ -294,6 +289,7 @@ explain.ctree <- function(x, explainer, approach, prediction_zero, comb_indici =
   explainer$mincriterion <- mincriterion
   explainer$minsplit <- minsplit
   explainer$minbucket <- minbucket
+  explainer$sample <- sample
 
   # Generate data
   dt <- prepare_data(explainer, ...)

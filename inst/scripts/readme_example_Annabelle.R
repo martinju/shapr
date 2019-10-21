@@ -3,7 +3,6 @@ library(shapr)
 library(data.table)
 library(party)
 
-library(ggplot2)
 
 data("Boston", package = "MASS")
 
@@ -34,14 +33,16 @@ p <- mean(y_train)
 # Computing the actual Shapley values with kernelSHAP accounting for feature dependence using
 # the empirical (conditional) distribution approach with bandwidth parameter sigma = 0.1 (default)
 
-x = x_test
 
-explanation <- explain(
+library(profvis)
+
+profvis({explanation <- explain(
   x_test,
   approach = 'ctree',
   explainer = explainer,
-  prediction_zero = p
-)
+  prediction_zero = p,
+  sample = TRUE)
+})
 
 # Printing the Shapley values for the test data
 print(explanation$dt)

@@ -26,13 +26,13 @@ explain(x, explainer, approach, prediction_zero, ...)
 
 \method{explain}{ctree}(x, explainer, approach, prediction_zero,
   comb_indici = NULL, comb_mincriterion = NULL, mincriterion = 0.95,
-  minsplit = 20, minbucket = 7, ...)
+  minsplit = 20, minbucket = 7, sample = TRUE, ...)
 }
 \arguments{
 \item{x}{A matrix or data.frame. Contains the the features, whose
 predictions ought to be explained (test data).}
 
-\item{explainer}{An \code{explainer} object to use for exaplaining the observations.
+\item{explainer}{An \code{explainer} object to use for explaining the observations.
 See \code{\link{shapr}}.}
 
 \item{approach}{Character vector of length \code{1} or \code{n_features}.
@@ -44,10 +44,8 @@ the response.}
 
 \item{...}{Additional arguments passed to \code{\link{prepare_data}}}
 
-\item{type}{String or list. Only applicable when \code{approach='empirical'}. If a string, the
-type of empirical approach to use,  equal to 'independence, 'gaussian' or 'fixed_sigma'. If a
-list, the elements in the list refers to the rows in \code{x} that ought to be included in
-each of the empirical approaches.}
+\item{type}{Character. Should be equal to either \code{"independence"},
+\code{"fixed_sigma"}, \code{"AICc_each_k"} or \code{"AICc_full"}.}
 
 \item{fixed_sigma_vec}{Vector or numeric. Only applicable when \code{approach='empirical'} and
 \code{type='fixed_sigma'}. The bandwidth to use. Default value \code{0.1}}
@@ -63,7 +61,7 @@ optimizing the AICc.}
 \item{AIC_optim_startval}{Numeric. Only applicable when \code{approach='empirical'} and
 \code{type='AICc_each_k'} or \code{type='AICc_full'}. Starting value when optimizing the AICc.}
 
-\item{w_threshold}{Postive integer between 0 and 1.}
+\item{w_threshold}{Positive integer between 0 and 1.}
 
 \item{mu}{Numeric vector. (Optional) Containing the mean of the data generating distribution.
 If \code{NULL} the expected values are estimated from the data. Note that this is only used
@@ -88,6 +86,8 @@ to \code{NULL}. Otherwise, it needs to be filled out.}
 \item{minsplit}{is the value that the sum of the left and right daughter nodes need to exceed.}
 
 \item{minbucket}{is equal to the minimum sum of weights in a terminal node.}
+
+\item{sample}{whether to sample from the node or just take all observations}
 }
 \value{
 data.frame. Contains the estimated Shapley values for the test data. Note that
