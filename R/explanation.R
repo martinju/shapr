@@ -44,7 +44,7 @@ explain <- function(x, explainer, approach, prediction_zero, ...) {
     stop(
       paste(
         "It seems that you passed a non-valid value for approach.",
-        "It should be either 'empirical', 'gaussian', 'copula' or",
+        "It should be either 'empirical', 'gaussian', 'copula', 'ctree' or",
         "a vector of length=ncol(x) with only the above characters."
       )
     )
