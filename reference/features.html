@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Calculate Shapley weights for test data — prediction • shapr</title>
+<title>Fetches feature labels from a given model object — features • shapr</title>
 
 
 <!-- jquery -->
@@ -39,9 +39,8 @@
 
 
 
-<meta property="og:title" content="Calculate Shapley weights for test data — prediction" />
-<meta property="og:description" content="This function should only be called internally, and not be used as
-a stand-alone function." />
+<meta property="og:title" content="Fetches feature labels from a given model object — features" />
+<meta property="og:description" content="Fetches feature labels from a given model object" />
 
 
 
@@ -124,60 +123,52 @@ a stand-alone function." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Calculate Shapley weights for test data</h1>
-    <small class="dont-index">Source: <a href='https://github.com/NorskRegnesentral/shapr/blob/master/R/predictions.R'><code>R/predictions.R</code></a></small>
-    <div class="hidden name"><code>prediction.Rd</code></div>
+    <h1>Fetches feature labels from a given model object</h1>
+    <small class="dont-index">Source: <a href='https://github.com/NorskRegnesentral/shapr/blob/master/R/models.R'><code>R/models.R</code></a></small>
+    <div class="hidden name"><code>features.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This function should only be called internally, and not be used as
-a stand-alone function.</p>
+    <p>Fetches feature labels from a given model object</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/shapr/man/prediction.html'>prediction</a></span>(<span class='kw'>dt</span>, <span class='kw'>prediction_zero</span>, <span class='kw'>explainer</span>)</pre>
+    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/shapr/man/features.html'>features</a></span>(<span class='kw'>x</span>, <span class='kw'>cnms</span>, feature_labels = <span class='kw'>NULL</span>)
+
+<span class='co'># S3 method for default</span>
+<span class='fu'><a href='https://rdrr.io/pkg/shapr/man/features.html'>features</a></span>(<span class='kw'>x</span>, <span class='kw'>cnms</span>, feature_labels = <span class='kw'>NULL</span>)
+
+<span class='co'># S3 method for lm</span>
+<span class='fu'><a href='https://rdrr.io/pkg/shapr/man/features.html'>features</a></span>(<span class='kw'>x</span>, <span class='kw'>cnms</span>, feature_labels = <span class='kw'>NULL</span>)
+
+<span class='co'># S3 method for glm</span>
+<span class='fu'><a href='https://rdrr.io/pkg/shapr/man/features.html'>features</a></span>(<span class='kw'>x</span>, <span class='kw'>cnms</span>, feature_labels = <span class='kw'>NULL</span>)
+
+<span class='co'># S3 method for ranger</span>
+<span class='fu'><a href='https://rdrr.io/pkg/shapr/man/features.html'>features</a></span>(<span class='kw'>x</span>, <span class='kw'>cnms</span>, feature_labels = <span class='kw'>NULL</span>)
+
+<span class='co'># S3 method for gam</span>
+<span class='fu'><a href='https://rdrr.io/pkg/shapr/man/features.html'>features</a></span>(<span class='kw'>x</span>, <span class='kw'>cnms</span>, feature_labels = <span class='kw'>NULL</span>)
+
+<span class='co'># S3 method for xgb.Booster</span>
+<span class='fu'><a href='https://rdrr.io/pkg/shapr/man/features.html'>features</a></span>(<span class='kw'>x</span>, <span class='kw'>cnms</span>, feature_labels = <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>dt</th>
-      <td><p>data.table</p></td>
+      <th>x</th>
+      <td><p>Model object for the model to be explained.</p></td>
     </tr>
     <tr>
-      <th>prediction_zero</th>
-      <td><p>Numeric. The value to use for <code>phi_0</code>.</p></td>
+      <th>cnms</th>
+      <td><p>Character vector. Represents the names of the columns in the data used for training/explaining.</p></td>
     </tr>
     <tr>
-      <th>explainer</th>
-      <td><p>An object of class <code>explainer</code>. See <code><a href='https://rdrr.io/pkg/shapr/man/shapr.html'>shapr</a></code>.</p></td>
+      <th>feature_labels</th>
+      <td><p>Character vector. Represents the labels of the features used for prediction.</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>An object of class <code><a href='https://rdrr.io/r/base/c.html'>c("shapr", "list")</a></code>. For more details see <code><a href='https://rdrr.io/pkg/shapr/man/explain.html'>explain</a></code>.</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>If <code>dt</code> does not contain three columns called <code>id</code>, <code>id_combination</code> and <code>w</code>
-the function will fail. <code>id</code> represents a unique key for a given test observation,
-and <code>id_combination</code> is a unique key for which feature combination the row represents. <code>w</code>
-represents the Shapley value of feature combination given by <code>id_combination</code>. In addition
-to these three columns, <code>dt</code> should also have columns which matches the variables used
-when training the model.</p>
-<p>I.e. you have fitted a linear model using the features <code>x1</code>,
-<code>x2</code> and <code>x3</code>, and you want to explain 5 test observations using the exact method, i.e.
-setting <code>exact = TRUE</code> in <code><a href='https://rdrr.io/pkg/shapr/man/shapr.html'>shapr</a></code>, the following properties should be satisfied</p><ol>
-<li><p><code><a href='https://rdrr.io/r/base/colnames.html'>colnames(dt)</a></code> equals <code>c("x1", "x2", "x3", "id", "id_combination", ""w)</code></p></li>
-<li><p><code>dt[, max(id)]</code> equals the number of test observations</p></li>
-<li><p><code>dt[, min(id)]</code> equals 1L.</p></li>
-<li><p><code>dt[, max(id_combination)]</code> equals <code>2^m</code> where m equals the number of features.</p></li>
-<li><p><code>dt[, min(id_combination)]</code> equals 1L.</p></li>
-<li><p><code>dt[, type(w)]</code> equals <code>double</code>.</p></li>
-</ol>
-
-    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
-
-    <p>Nikolai Sellereite</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

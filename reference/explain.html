@@ -8,21 +8,29 @@
 
 <title>Explain the output of machine learning models with more accurately estimated Shapley values — explain • shapr</title>
 
+
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -30,10 +38,10 @@
 
 
 
-<meta property="og:title" content="Explain the output of machine learning models with more accurately estimated Shapley values — explain" />
 
-<meta property="og:description" content="TODO: Add a more detailed description" />
-<meta name="twitter:card" content="summary" />
+<meta property="og:title" content="Explain the output of machine learning models with more accurately estimated Shapley values — explain" />
+<meta property="og:description" content="Explain the output of machine learning models with more accurately estimated Shapley values" />
+
 
 
 
@@ -47,9 +55,10 @@
 <![endif]-->
 
 
+
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -63,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">shapr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
       </span>
     </div>
 
@@ -71,7 +80,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -94,11 +103,10 @@
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/NorskRegnesentral/shapr">
-    <span class="fa fa-github fa-lg"></span>
+  <a href="https://github.com/NorskRegnesentral/shapr/">
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -109,6 +117,7 @@
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -120,29 +129,51 @@
     </div>
 
     <div class="ref-description">
-    
-    <p>TODO: Add a more detailed description</p>
-    
+    <p>Explain the output of machine learning models with more accurately estimated Shapley values</p>
     </div>
 
-    <pre class="usage"><span class='fu'>explain</span>(<span class='no'>x</span>, <span class='no'>explainer</span>, <span class='no'>approach</span>, <span class='no'>prediction_zero</span>, <span class='no'>...</span>)
+    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/shapr/man/explain.html'>explain</a></span>(<span class='kw'>x</span>, <span class='kw'>explainer</span>, <span class='kw'>approach</span>, <span class='kw'>prediction_zero</span>, <span class='kw'>...</span>)
 
 <span class='co'># S3 method for empirical</span>
-<span class='fu'>explain</span>(<span class='no'>x</span>, <span class='no'>explainer</span>, <span class='no'>approach</span>, <span class='no'>prediction_zero</span>,
-  <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"fixed_sigma"</span>, <span class='kw'>fixed_sigma_vec</span> <span class='kw'>=</span> <span class='fl'>0.1</span>, <span class='kw'>n_samples_aicc</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
-  <span class='kw'>eval_max_aicc</span> <span class='kw'>=</span> <span class='fl'>20</span>, <span class='kw'>start_aicc</span> <span class='kw'>=</span> <span class='fl'>0.1</span>, <span class='kw'>w_threshold</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='no'>...</span>)
+<span class='fu'><a href='https://rdrr.io/pkg/shapr/man/explain.html'>explain</a></span>(
+  <span class='kw'>x</span>,
+  <span class='kw'>explainer</span>,
+  <span class='kw'>approach</span>,
+  <span class='kw'>prediction_zero</span>,
+  type = <span class='st'>"fixed_sigma"</span>,
+  fixed_sigma_vec = <span class='fl'>0.1</span>,
+  n_samples_aicc = <span class='fl'>1000</span>,
+  eval_max_aicc = <span class='fl'>20</span>,
+  start_aicc = <span class='fl'>0.1</span>,
+  w_threshold = <span class='fl'>0.95</span>,
+  <span class='kw'>...</span>
+)
 
 <span class='co'># S3 method for gaussian</span>
-<span class='fu'>explain</span>(<span class='no'>x</span>, <span class='no'>explainer</span>, <span class='no'>approach</span>, <span class='no'>prediction_zero</span>,
-  <span class='kw'>mu</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>cov_mat</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)
+<span class='fu'><a href='https://rdrr.io/pkg/shapr/man/explain.html'>explain</a></span>(
+  <span class='kw'>x</span>,
+  <span class='kw'>explainer</span>,
+  <span class='kw'>approach</span>,
+  <span class='kw'>prediction_zero</span>,
+  mu = <span class='kw'>NULL</span>,
+  cov_mat = <span class='kw'>NULL</span>,
+  <span class='kw'>...</span>
+)
 
 <span class='co'># S3 method for copula</span>
-<span class='fu'>explain</span>(<span class='no'>x</span>, <span class='no'>explainer</span>, <span class='no'>approach</span>, <span class='no'>prediction_zero</span>, <span class='no'>...</span>)
+<span class='fu'><a href='https://rdrr.io/pkg/shapr/man/explain.html'>explain</a></span>(<span class='kw'>x</span>, <span class='kw'>explainer</span>, <span class='kw'>approach</span>, <span class='kw'>prediction_zero</span>, <span class='kw'>...</span>)
 
 <span class='co'># S3 method for combined</span>
-<span class='fu'>explain</span>(<span class='no'>x</span>, <span class='no'>explainer</span>, <span class='no'>approach</span>, <span class='no'>prediction_zero</span>,
-  <span class='kw'>mu</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>cov_mat</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
-    
+<span class='fu'><a href='https://rdrr.io/pkg/shapr/man/explain.html'>explain</a></span>(
+  <span class='kw'>x</span>,
+  <span class='kw'>explainer</span>,
+  <span class='kw'>approach</span>,
+  <span class='kw'>prediction_zero</span>,
+  mu = <span class='kw'>NULL</span>,
+  cov_mat = <span class='kw'>NULL</span>,
+  <span class='kw'>...</span>
+)</pre>
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -154,7 +185,7 @@ predictions ought to be explained (test data).</p></td>
     <tr>
       <th>explainer</th>
       <td><p>An <code>explainer</code> object to use for explaining the observations.
-See <code><a href='shapr.html'>shapr</a></code>.</p></td>
+See <code><a href='https://rdrr.io/pkg/shapr/man/shapr.html'>shapr</a></code>.</p></td>
     </tr>
     <tr>
       <th>approach</th>
@@ -164,12 +195,12 @@ either be <code>"gaussian"</code>, <code>"copula"</code> or <code>"empirical"</c
     </tr>
     <tr>
       <th>prediction_zero</th>
-      <td><p>The prediction value for unseen data, typically equal to the mean of
+      <td><p>Numeric. The prediction value for unseen data, typically equal to the mean of
 the response.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Additional arguments passed to <code><a href='prepare_data.html'>prepare_data</a></code></p></td>
+      <td><p>Additional arguments passed to <code><a href='https://rdrr.io/pkg/shapr/man/prepare_data.html'>prepare_data</a></code></p></td>
     </tr>
     <tr>
       <th>type</th>
@@ -178,25 +209,27 @@ the response.</p></td>
     </tr>
     <tr>
       <th>fixed_sigma_vec</th>
-      <td><p>Vector or numeric. Only applicable when <code>approach='empirical'</code> and
-<code>type='fixed_sigma'</code>. The bandwidth to use. Default value <code>0.1</code></p></td>
+      <td><p>Numeric. Represents the kernel bandwidth. Note that this argument is only
+applicable when <code>approach = "empirical"</code>, and <code>type = "fixed_sigma"</code></p></td>
     </tr>
     <tr>
       <th>n_samples_aicc</th>
-      <td><p>Positive integer. Only applicable when
-<code>approach='empirical'</code> and <code>type='AICc_each_k'</code> or
-<code>type='AICc_full'</code>. Number of samples to consider in AICc optimization.</p></td>
+      <td><p>Positive integer. Number of samples to consider in AICc optimization.
+Note that this argument is only applicable when <code>approach = "empirical"</code>, and <code>type</code>
+is either equal to <code>"AICc_each_k"</code> or <code>"AICc_full"</code></p></td>
     </tr>
     <tr>
       <th>eval_max_aicc</th>
-      <td><p>Positive integer. Only applicable when <code>approach='empirical'</code>
-and <code>type='AICc_each_k'</code> or <code>type='AICc_full'</code>. Maximum number of iterations when
-optimizing the AICc.</p></td>
+      <td><p>Positive integer. Maximum number of iterations when
+optimizing the AICc. Note that this argument is only applicable when
+<code>approach = "empirical"</code>, and <code>type</code> is either equal to
+<code>"AICc_each_k"</code> or <code>"AICc_full"</code></p></td>
     </tr>
     <tr>
       <th>start_aicc</th>
-      <td><p>Numeric. Only applicable when <code>approach='empirical'</code> and
-<code>type='AICc_each_k'</code> or <code>type='AICc_full'</code>. Starting value when optimizing the AICc.</p></td>
+      <td><p>Numeric. Start value of <code>sigma</code> when optimizing the AICc. Note that this argument
+is only applicable when <code>approach = "empirical"</code>, and <code>type</code> is either equal to
+<code>"AICc_each_k"</code> or <code>"AICc_full"</code></p></td>
     </tr>
     <tr>
       <th>w_threshold</th>
@@ -215,34 +248,94 @@ generating distribution. <code>NULL</code> means it is estimated from the data i
 (in the Gaussian approach).</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>data.frame. Contains the estimated Shapley values for the test data. Note that
-the dimensions of the data.frame equals <code>n x (p+1)</code>, where <code>n</code> equals the number
-of test observations, and <code>p</code> equals the total number of features.</p>
-    
+    <p>Object of class <code><a href='https://rdrr.io/r/base/c.html'>c("shapr", "list")</a></code>. Contains the following items:</p><dl>
+  <dt>dt</dt><dd><p>data.table</p></dd>
+  <dt>model</dt><dd><p>Model object</p></dd>
+  <dt>p</dt><dd><p>Numeric vector</p></dd>
+  <dt>x_test</dt><dd><p>data.table</p></dd>
+
+</dl>
+
+<p>Note that the returned items <code>model</code>, <code>p</code> and <code>x_test</code> are mostly added due
+to the implementation of <code>plot.shapr</code>. If you only want to look at the numerical results
+it is sufficient to focus on <code>dt</code>. <code>dt</code> is a data.table where the number of rows equals
+the number of observations you'd like to explain, and the number of columns equals <code>m +1</code>,
+where <code>m</code> equals the total number of features in your model.</p>
+<p>If <code>dt[i, j + 1] &gt; 0</code> it indicates that the j-th feature increased the prediction for
+the i-th observation. Likewise, if <code>dt[i, j + 1] &lt; 0</code> it indicates that the j-th feature
+decreased the prediction for the i-th observation. The magnitude of the value is also important
+to notice. E.g. if <code>dt[i, k + 1]</code> and <code>dt[i, j + 1]</code> are greater than <code>0</code>,
+where <code>j != k</code>, and <code>dt[i, k + 1]</code> &gt; <code>dt[i, j + 1]</code> this indicates that feature
+<code>j</code> and <code>k</code> both increased the value of the prediction, but that the effect of the k-th
+feature was larger than the j-th feature.</p>
+<p>The first column in <code>dt</code>, called `none`, is the prediction value not assigned to any of the features
+(\(\phi\)<sub>0</sub>).
+It's equal for all observations and set by the user through the argument <code>prediction_zero</code>.
+In theory this value should be the expected prediction without conditioning on any features.
+Typically we set this value equal to the mean of the response variable in our training data, but other choices
+such as the mean of the predictions in the training data are also reasonable.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>TODO: Add information about approach.
-TODO: Some additional details about the returned object</p>
-    
+    <p>The most important thing to notice is that <code>shapr</code> has implemented three different
+approaches for estimating the conditional distributions of the data, namely <code>"empirical"</code>,
+<code>"gaussian"</code> and <code>"copula"</code>.</p>
+<p>In addition to this the user will also have the option of combining the three approaches.
+E.g. if you're in a situation where you have trained a model the consists of 10 features,
+and you'd like to use the <code>"gaussian"</code> approach when you condition on a single feature,
+the <code>"empirical"</code> approach if you condition on 2-5 features, and <code>"copula"</code> version
+if you condition on more than 5 features this can be done by simply passing
+<code>approach = c("gaussian", rep("empirical", 4), rep("copula", 5))</code>. If
+<code>"approach[i]" = "gaussian"</code> it means that you'd like to use the <code>"gaussian"</code> approach
+when conditioning on <code>i</code> features.</p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
+    <p>Camilla Lingjaerde, Nikolai Sellereite</p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'># Load example data</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='st'>"Boston"</span>, package = <span class='st'>"MASS"</span>)
+
+<span class='co'># Split data into test- and training data</span>
+<span class='kw'>x_train</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='kw'>Boston</span>, <span class='op'>-</span><span class='fl'>3</span>)
+<span class='kw'>x_test</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>tail</a></span>(<span class='kw'>Boston</span>, <span class='fl'>3</span>)
+
+<span class='co'># Fit a linear model</span>
+<span class='kw'>model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='kw'>medv</span> <span class='op'>~</span> <span class='kw'>lstat</span> <span class='op'>+</span> <span class='kw'>rm</span> <span class='op'>+</span> <span class='kw'>dis</span> <span class='op'>+</span> <span class='kw'>indus</span>, data = <span class='kw'>x_train</span>)
+
+<span class='co'># Create an explainer object</span>
+<span class='kw'>explainer</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/shapr/man/shapr.html'>shapr</a></span>(<span class='kw'>x_train</span>, <span class='kw'>model</span>)
+
+<span class='co'># Explain predictions</span>
+<span class='kw'>p</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span>(<span class='kw'>x_train</span><span class='op'>$</span><span class='kw'>medv</span>)
+
+<span class='co'># Empirical approach</span>
+<span class='kw'>explain1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/shapr/man/explain.html'>explain</a></span>(<span class='kw'>x_test</span>, <span class='kw'>explainer</span>, approach = <span class='st'>"empirical"</span>, prediction_zero = <span class='kw'>p</span>, n_samples = <span class='fl'>1e2</span>)
+
+<span class='co'># Gaussian approach</span>
+<span class='kw'>explain2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/shapr/man/explain.html'>explain</a></span>(<span class='kw'>x_test</span>, <span class='kw'>explainer</span>, approach = <span class='st'>"gaussian"</span>, prediction_zero = <span class='kw'>p</span>, n_samples = <span class='fl'>1e2</span>)
+
+<span class='co'># Gaussian copula approach</span>
+<span class='kw'>explain3</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/shapr/man/explain.html'>explain</a></span>(<span class='kw'>x_test</span>, <span class='kw'>explainer</span>, approach = <span class='st'>"copula"</span>, prediction_zero = <span class='kw'>p</span>, n_samples = <span class='fl'>1e2</span>)
+
+<span class='co'># Combined approach</span>
+<span class='kw'>approach</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"gaussian"</span>, <span class='st'>"gaussian"</span>, <span class='st'>"empirical"</span>, <span class='st'>"empirical"</span>)
+<span class='kw'>explain4</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/shapr/man/explain.html'>explain</a></span>(<span class='kw'>x_test</span>, <span class='kw'>explainer</span>, approach = <span class='kw'>approach</span>, prediction_zero = <span class='kw'>p</span>, n_samples = <span class='fl'>1e2</span>)
+
+<span class='co'># Plot the results</span>
+<span class='co'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>explain1</span>)
+}</div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#value">Value</a></li>
-
-      <li><a href="#details">Details</a></li>
-          </ul>
-
-    <h2>Author</h2>
-    <p>Camilla Lingjaerde</p>
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
+
 
       <footer>
       <div class="copyright">
@@ -250,13 +343,16 @@ TODO: Some additional details about the returned object</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

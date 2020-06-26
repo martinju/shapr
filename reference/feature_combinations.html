@@ -6,23 +6,31 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get combinations — feature_combinations • shapr</title>
+<title>Define feature combinations, and fetch additional information about each unique combination — feature_combinations • shapr</title>
+
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -30,10 +38,10 @@
 
 
 
-<meta property="og:title" content="Get combinations — feature_combinations" />
 
-<meta property="og:description" content="Get combinations" />
-<meta name="twitter:card" content="summary" />
+<meta property="og:title" content="Define feature combinations, and fetch additional information about each unique combination — feature_combinations" />
+<meta property="og:description" content="Define feature combinations, and fetch additional information about each unique combination" />
+
 
 
 
@@ -47,9 +55,10 @@
 <![endif]-->
 
 
+
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -63,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">shapr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
       </span>
     </div>
 
@@ -71,7 +80,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -94,11 +103,10 @@
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/NorskRegnesentral/shapr">
-    <span class="fa fa-github fa-lg"></span>
+  <a href="https://github.com/NorskRegnesentral/shapr/">
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -109,78 +117,86 @@
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get combinations</h1>
+    <h1>Define feature combinations, and fetch additional information about each unique combination</h1>
     <small class="dont-index">Source: <a href='https://github.com/NorskRegnesentral/shapr/blob/master/R/features.R'><code>R/features.R</code></a></small>
     <div class="hidden name"><code>feature_combinations.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    
-    <p>Get combinations</p>
-    
+    <p>Define feature combinations, and fetch additional information about each unique combination</p>
     </div>
 
-    <pre class="usage"><span class='fu'>feature_combinations</span>(<span class='no'>m</span>, <span class='kw'>exact</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>n_combinations</span> <span class='kw'>=</span> <span class='fl'>200</span>,
-  <span class='kw'>shapley_weight_inf_replacement</span> <span class='kw'>=</span> <span class='fl'>10</span>^<span class='fl'>6</span>, <span class='kw'>reduce_dim</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
-    
+    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/shapr/man/feature_combinations.html'>feature_combinations</a></span>(
+  <span class='kw'>m</span>,
+  exact = <span class='fl'>TRUE</span>,
+  n_combinations = <span class='fl'>200</span>,
+  weight_zero_m = <span class='fl'>10</span><span class='op'>^</span><span class='fl'>6</span>
+)</pre>
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>m</th>
-      <td><p>Integer. Total number of features</p></td>
+      <td><p>Positive integer. Total number of features.</p></td>
     </tr>
     <tr>
       <th>exact</th>
-      <td><p>Logical. If TRUE, uses the full sum in the Shapley formula, if FALSE, uses a
-sampling approach to approximate the sum</p></td>
+      <td><p>Logical. If <code>TRUE</code> all <code>2^m</code> combinations are generated, otherwise a
+subsample of the combinations is used.</p></td>
     </tr>
     <tr>
-      <th>shapley_weight_inf_replacement</th>
-      <td><p>Numeric. Indicating which weight to use for the full
-conditional and unconditional expectations in kernel SHAPs weighted least squares formulation.</p></td>
+      <th>n_combinations</th>
+      <td><p>Positive integer. Note that if <code>exact = TRUE</code>,
+<code>n_combinations</code> is ignored. However, if <code>m &gt; 12</code> you'll need to add a positive integer
+value for <code>n_combinations</code>.</p></td>
     </tr>
     <tr>
-      <th>reduce_dim</th>
-      <td><p>Logical. Indicating whether to reduce the dimension of the weighted least
-squares problem by merging identical columns and adjusting their weights.</p></td>
+      <th>weight_zero_m</th>
+      <td><p>Numeric. The value to use as a replacement for infinite combination
+weights when doing numerical operations.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>data.table</p>
-    
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+    <p>A data.table that contains the following columns:</p><dl>
+<dt>id_combination</dt><dd><p>Positive integer. Represents a unique key for each combination. Note that the table
+is sorted by <code>id_combination</code>, so that is always equal to <code>x[["id_combination"]] = 1:nrow(x)</code>.</p></dd>
+<dt>features</dt><dd><p>List. Each item of the list is an integer vector where <code>features[[i]]</code>
+represents the indices of the features included in combination <code>i</code>. Note that all the items
+are sorted such that <code>features[[i]] == sort(features[[i]])</code> is always true.</p></dd>
+<dt>n_features</dt><dd><p>Vector of positive integers. <code>n_features[i]</code> equals the number of features in combination
+<code>i</code>, i.e. <code>n_features[i] = length(features[[i]])</code>.</p></dd>.
+<dt>N</dt><dd><p>Positive integer. The number of unique ways to sample <code>n_features[i]</code> features
+from <code>m</code> different features, without replacement.</p></dd>
 
-    <p>The returned data.table contains the following columns</p><dl class='dl-horizontal'>
-<dt>ID</dt><dd><p>Positive integer. Unique key for combination</p></dd>
-<dt>features</dt><dd><p>List of integer vectors</p></dd>
-<dt>nfeatures</dt><dd><p>Positive integer</p></dd>
-<dt>N</dt><dd><p>Positive integer</p></dd>
 </dl>
-    
 
-  </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#value">Value</a></li>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
-      <li><a href="#details">Details</a></li>
-          </ul>
-
-    <h2>Author</h2>
     <p>Nikolai Sellereite, Martin Jullum</p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'># All combinations</span>
+<span class='kw'>x</span> <span class='op'>&lt;-</span> <span class='kw'>shapr</span>:::<span class='fu'><a href='https://rdrr.io/pkg/shapr/man/feature_combinations.html'>feature_combinations</a></span>(m = <span class='fl'>5</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='kw'>x</span>) <span class='co'># Equals 2^5 = 32</span></div><div class='output co'>#&gt; [1] 32</div><div class='input'>
+<span class='co'># Subsample of combinations</span>
+<span class='kw'>x</span> <span class='op'>&lt;-</span> <span class='kw'>shapr</span>:::<span class='fu'><a href='https://rdrr.io/pkg/shapr/man/feature_combinations.html'>feature_combinations</a></span>(m = <span class='fl'>13</span>, n_combinations = <span class='fl'>1e3</span>)</div></pre>
+  </div>
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
+
 
       <footer>
       <div class="copyright">
@@ -188,13 +204,16 @@ squares problem by merging identical columns and adjusting their weights.</p></t
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

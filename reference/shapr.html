@@ -8,21 +8,29 @@
 
 <title>Create an explainer object with Shapley weights for test data. — shapr • shapr</title>
 
+
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -30,10 +38,10 @@
 
 
 
-<meta property="og:title" content="Create an explainer object with Shapley weights for test data. — shapr" />
 
+<meta property="og:title" content="Create an explainer object with Shapley weights for test data. — shapr" />
 <meta property="og:description" content="Create an explainer object with Shapley weights for test data." />
-<meta name="twitter:card" content="summary" />
+
 
 
 
@@ -47,9 +55,10 @@
 <![endif]-->
 
 
+
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -63,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">shapr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
       </span>
     </div>
 
@@ -71,7 +80,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -94,11 +103,10 @@
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/NorskRegnesentral/shapr">
-    <span class="fa fa-github fa-lg"></span>
+  <a href="https://github.com/NorskRegnesentral/shapr/">
+    <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -109,6 +117,7 @@
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -120,52 +129,97 @@
     </div>
 
     <div class="ref-description">
-    
     <p>Create an explainer object with Shapley weights for test data.</p>
-    
     </div>
 
-    <pre class="usage"><span class='fu'>shapr</span>(<span class='no'>x</span>, <span class='no'>model</span>, <span class='kw'>n_combinations</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
-    
+    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/shapr/man/shapr.html'>shapr</a></span>(<span class='kw'>x</span>, <span class='kw'>model</span>, n_combinations = <span class='kw'>NULL</span>, feature_labels = <span class='kw'>NULL</span>)</pre>
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>An <code>ntrain x p</code> numeric matrix or data.frame, where <code>p = ncol(x)</code> (total number of explanatory variables).Contains the variables used for training the model
-(i.e. the explanatory variables). Note that the response variable should not be part of
-<code>x</code>.</p></td>
+      <td><p>Numeric matrix or data.frame. Contains the data used for training the model.</p></td>
     </tr>
     <tr>
       <th>model</th>
-      <td><p>The model whose predictions we want to explain.</p></td>
+      <td><p>The model whose predictions we want to explain. See <code><a href='https://rdrr.io/pkg/shapr/man/predict_model.html'>predict_model</a></code>
+for more information about which models <code>shapr</code> supports natively.</p></td>
     </tr>
     <tr>
       <th>n_combinations</th>
       <td><p>Integer. The number of feature combinations to sample. If <code>NULL</code>,
 the exact method is used and all combinations are considered. The maximum number of
-combinations equals <code>2^p</code>.</p></td>
+combinations equals <code>2^ncol(x)</code>.</p></td>
+    </tr>
+    <tr>
+      <th>feature_labels</th>
+      <td><p>Character vector. The labels/names of the features used for training the model.
+Only applicable if you are using a custom model. Otherwise the features in use are extracted from <code>model</code>.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A list to be used by <code>explain</code> to compute the kernel SHAP values (<code>Kshap</code>).</p>
-    
+    <p>Named list that contains the following items:</p><dl>
+  <dt>exact</dt><dd><p>Boolean. Equals <code>TRUE</code> if <code>n_combinations = NULL</code> or
+  <code>n_combinations &lt; 2^ncol(x)</code>, otherwise <code>FALSE</code>.</p></dd>
+  <dt>n_features</dt><dd><p>Positive integer. The number of columns in <code>x</code></p></dd>
+  <dt>model_type</dt><dd><p>Character. Returned value after calling <code><a href='https://rdrr.io/pkg/shapr/man/model_type.html'>model_type(model)</a></code></p></dd>
+  <dt>S</dt><dd><p>Binary matrix. The number of rows equals the number of unique combinations, and
+  the number of columns equals the total number of features. I.e. let's say we have a case with
+  three features. In that case we have <code>2^3 = 8</code> unique combinations. If the j-th
+  observation for the i-th row equals <code>1</code> it indicates that the j-th feature is present in
+  the i-th combination. Otherwise it equals <code>0</code>.</p></dd>
+  <dt>W</dt><dd><p>Second item</p></dd>
+  <dt>X</dt><dd><p>data.table. Returned object from <code><a href='https://rdrr.io/pkg/shapr/man/feature_combinations.html'>feature_combinations</a></code></p></dd>
+  <dt>x_train</dt><dd><p>data.table. Transformed <code>x</code> into a data.table.</p></dd>
 
-  </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#value">Value</a></li>
-          </ul>
+</dl>
 
-    <h2>Author</h2>
+<p>In addition to the items above <code>model</code>, <code>feature_labels</code> (updated with the names actually used by the
+model) and <code>n_combinations</code> is also present in the returned object.</p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
     <p>Nikolai Sellereite</p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'># Load example data</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='st'>"Boston"</span>, package = <span class='st'>"MASS"</span>)
+<span class='kw'>df</span> <span class='op'>&lt;-</span> <span class='kw'>Boston</span>
+
+<span class='co'># Example using the exact method</span>
+<span class='kw'>x_var</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"lstat"</span>, <span class='st'>"rm"</span>, <span class='st'>"dis"</span>, <span class='st'>"indus"</span>)
+<span class='kw'>y_var</span> <span class='op'>&lt;-</span> <span class='st'>"medv"</span>
+<span class='kw'>df1</span> <span class='op'>&lt;-</span> <span class='kw'>df</span>[, <span class='kw'>x_var</span>]
+<span class='kw'>model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='kw'>medv</span> <span class='op'>~</span> <span class='kw'>lstat</span> <span class='op'>+</span> <span class='kw'>rm</span> <span class='op'>+</span> <span class='kw'>dis</span> <span class='op'>+</span> <span class='kw'>indus</span>, data = <span class='kw'>df</span>)
+<span class='kw'>explainer</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/shapr/man/shapr.html'>shapr</a></span>(<span class='kw'>df1</span>, <span class='kw'>model</span>)
+
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='kw'>explainer</span><span class='op'>$</span><span class='kw'>X</span>))</div><div class='output co'>#&gt; [1] 16</div><div class='input'><span class='co'># 16 (which equals 2^4)</span>
+
+<span class='co'># Example using approximation</span>
+<span class='kw'>y_var</span> <span class='op'>&lt;-</span> <span class='st'>"medv"</span>
+<span class='kw'>x_var</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/sets.html'>setdiff</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>colnames</a></span>(<span class='kw'>df</span>), <span class='kw'>y_var</span>)
+<span class='kw'>model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='kw'>medv</span> <span class='op'>~</span> <span class='kw'>.</span>, data = <span class='kw'>df</span>)
+<span class='kw'>df2</span> <span class='op'>&lt;-</span> <span class='kw'>df</span>[, <span class='kw'>x_var</span>]
+<span class='kw'>explainer</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/shapr/man/shapr.html'>shapr</a></span>(<span class='kw'>df2</span>, <span class='kw'>model</span>, n_combinations = <span class='fl'>1e3</span>)
+
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='kw'>explainer</span><span class='op'>$</span><span class='kw'>X</span>))</div><div class='output co'>#&gt; [1] 564</div><div class='input'>
+<span class='co'># Example using approximation where n_combinations &gt; 2^m</span>
+<span class='kw'>x_var</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"lstat"</span>, <span class='st'>"rm"</span>, <span class='st'>"dis"</span>, <span class='st'>"indus"</span>)
+<span class='kw'>y_var</span> <span class='op'>&lt;-</span> <span class='st'>"medv"</span>
+<span class='kw'>df3</span> <span class='op'>&lt;-</span> <span class='kw'>df</span>[, <span class='kw'>x_var</span>]
+<span class='kw'>model</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span>(<span class='kw'>medv</span> <span class='op'>~</span> <span class='kw'>lstat</span> <span class='op'>+</span> <span class='kw'>rm</span> <span class='op'>+</span> <span class='kw'>dis</span> <span class='op'>+</span> <span class='kw'>indus</span>, data = <span class='kw'>df</span>)
+<span class='kw'>explainer</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/shapr/man/shapr.html'>shapr</a></span>(<span class='kw'>df1</span>, <span class='kw'>model</span>, n_combinations = <span class='fl'>1e3</span>)</div><div class='output co'>#&gt; n_combinations is larger than or equal to 2^m = 16. Using exact instead.</div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='kw'>explainer</span><span class='op'>$</span><span class='kw'>X</span>))</div><div class='output co'>#&gt; [1] 16</div><div class='input'><span class='co'># 16 (which equals 2^4)</span></div></pre>
+  </div>
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
+
 
       <footer>
       <div class="copyright">
@@ -173,13 +227,16 @@ combinations equals <code>2^p</code>.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 
