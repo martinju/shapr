@@ -91,7 +91,7 @@ is inspired by Pedersen and Benesty (2019).
 To install the current development version, use
 
 ``` r
-remotes::install_github("NorskRegnesentral/shapr")
+rem3otes::install_github("NorskRegnesentral/shapr")
 ```
 
 If you would like to install all packages of the models we currently

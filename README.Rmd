@@ -70,7 +70,7 @@ The application programming interface (API) of `shapr` is inspired by @lime_api.
 To install the current development version, use
 
 ```{r, eval = FALSE}
-remotes::install_github("NorskRegnesentral/shapr")
+rem3otes::install_github("NorskRegnesentral/shapr")
 ```
 
 If you would like to install all packages of the models we currently support, use
