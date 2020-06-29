@@ -89,7 +89,7 @@ feature_exact <- function(m, weight_zero_m = 10^6) {
 }
 
 #' @keywords internal
-feature_not_exact <- function(m, n_combinations = 200, weight_zero_m = 10^6) {
+feature_2not_exact <- function(m, n_combinations = 200, weight_zero_m = 10^6) {
 
   features <- id_combination <- n_features <- shapley_weight <- N <- NULL # due to NSE notes in R CMD check
 
