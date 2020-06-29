@@ -168,7 +168,7 @@ explain.empirical <- function(x, explainer, approach, prediction_zero,
 
   # Add arguments to explainer object
   explainer$x_test <- explainer_x_test(x, explainer$feature_labels)
-  explainer$approach <- approach
+  #explainer$approach <- approach
   explainer$type <- type
   explainer$fixed_sigma_vec <- fixed_sigma_vec
   explainer$n_samples_aicc <- n_samples_aicc
